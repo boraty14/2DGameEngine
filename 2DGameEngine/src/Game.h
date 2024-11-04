@@ -1,4 +1,6 @@
 #pragma once
+#include <SDL_render.h>
+#include <SDL_video.h>
 
 class Game
 {
@@ -11,6 +13,9 @@ public:
 	void Update();
 	void Render();
 	void Destroy();
-private:
 
+private:
+	SDL_Window* window;
+	SDL_Renderer* renderer;
+	bool isRunning;
 };
