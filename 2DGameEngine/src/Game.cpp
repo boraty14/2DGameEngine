@@ -22,11 +22,9 @@ void Game::Initialize()
 	}
 
 	SDL_ShowCursor(SDL_DISABLE);
-	SDL_DisplayMode displayMode;
-	SDL_GetDisplayMode(0,0, &displayMode);
+	windowWidth = 800;
+	windowHeight = 600;
 
-	windowWidth = displayMode.w;
-	windowHeight = displayMode.h;
 
 	window = SDL_CreateWindow(
 		nullptr, 
@@ -43,12 +41,17 @@ void Game::Initialize()
 		return;
 	}
 
-	renderer = SDL_CreateRenderer(window, -1, 0);
+	renderer = SDL_CreateRenderer(
+		window, 
+		-1, 
+		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
+	);
 	if (!renderer)
 	{
 		std::cerr << "Error creating SDL renderer" << '\n';
 		return;
 	}
+	SDL_SetWindowFullscreen(window,SDL_WINDOW_FULLSCREEN_DESKTOP);
 
 	isRunning = true;
 	
@@ -94,6 +97,7 @@ void Game::Update()
 void Game::Render()
 {
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	SDL_RenderSetLogicalSize(renderer, windowWidth, windowHeight);
 	SDL_RenderClear(renderer);
 	SDL_RenderPresent(renderer);
 }
