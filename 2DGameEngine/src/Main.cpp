@@ -7,14 +7,15 @@
 #include <imgui/imgui.h>
 #include <sol/sol.hpp>
 
+#include "Game.h"
+
 int main(int argc, char* argv[]) {
-	sol::state lua;
-	lua.open_libraries(sol::lib::base);
+	Game game;
 
-	glm::vec2 velocity = glm::vec2(1.0f, 0.0f);
+	game.Initialize();
+	game.Run();
+	game.Destroy();
 
-	SDL_Init(SDL_INIT_EVERYTHING);
-    std::cout << "Hello, world!" << std::endl;
-    std::cout << velocity.x << std::endl;
+	//SDL_Init(SDL_INIT_EVERYTHING);
     return 0;
 }
