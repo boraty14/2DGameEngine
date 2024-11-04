@@ -14,6 +14,8 @@ public:
 	void Render();
 	void Destroy();
 
+	int windowWidth;
+	int windowHeight;
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;

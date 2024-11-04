@@ -21,12 +21,19 @@ void Game::Initialize()
 		return;
 	}
 
+	SDL_ShowCursor(SDL_DISABLE);
+	SDL_DisplayMode displayMode;
+	SDL_GetDisplayMode(0,0, &displayMode);
+
+	windowWidth = displayMode.w;
+	windowHeight = displayMode.h;
+
 	window = SDL_CreateWindow(
 		nullptr, 
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		800,
-		600,
+		windowWidth,
+		windowHeight,
 		SDL_WINDOW_BORDERLESS
 	);
 
@@ -86,7 +93,9 @@ void Game::Update()
 
 void Game::Render()
 {
-
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+	SDL_RenderClear(renderer);
+	SDL_RenderPresent(renderer);
 }
 
 void Game::Destroy()
